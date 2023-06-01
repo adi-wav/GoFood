@@ -1,20 +1,30 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
 
-import reportWebVitals from './reportWebVitals';
+global.foodData = require('./db')(function call(err, data, CatData) {
+  // console.log(data)
+  if(err) console.log(err);
+  global.foodData = data;
+  global.foodCategory = CatData;
+})
 
+const express = require('express')
+const app = express()
+const port = 5000
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+app.use(express.json())
 
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-      <App />
-  </React.StrictMode>
-);
+app.use('/api/auth', require('./Routes/Auth'));
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+app.listen(port, () => {
+  console.log(`Example app listening on http://localhost:${port}`)
+})
