@@ -1,24 +1,20 @@
-const express = require('express')
-const app = express()
-const port = 5000
-const mongoDB = require("./db")
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
 
-app.use((req,res,next)=>{
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-})
+import reportWebVitals from './reportWebVitals';
 
-mongoDB();
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-app.use(express.json())
-app.use('/api', require("./Routes/CreateUser"));
-app.use('/api', require("./Routes/DisplayData"));
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+      <App />
+  </React.StrictMode>
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
