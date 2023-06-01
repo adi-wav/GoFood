@@ -4,6 +4,10 @@ export default function Card(props) {
 
   let options = props.options;
   let priceOptions = Object.keys(options)
+  const handleAddToCart = ()=>{
+    
+  }
+
   return (
     <div>
       <div>
@@ -29,6 +33,11 @@ export default function Card(props) {
                 Total Price:
               </div>
             </div>
+            <hr>
+            </hr>
+            <button className={'btn btn-success justify-center ms-2'} onClick={handleAddToCart}>Add to Cart</button>
+
+
           </div>
         </div>
       </div>

@@ -1,7 +1,16 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import {Link,useNavigate} from 'react-router-dom'
 
 export default function Navbar() {
+
+  const navigate = useNavigate();
+
+  const handleLogout = ()=>{
+    localStorage.removeItem("authToken");
+    navigate("/login")
+
+  }
+
   return (
     <div>
       
@@ -32,8 +41,12 @@ export default function Navbar() {
       </div>
       :
       <div>
-      <div className='btn bg-white text-success mx-2'>My Cart</div>
-      <div className='btn bg-white text-success mx-2'>Logout</div>
+      <div className='btn bg-white text-success mx-2'>
+        My Cart
+      </div>
+      <div className='btn bg-white text-danger mx-2' onClick={handleLogout}>
+        Logout
+      </div>
       </div> 
       }
 
